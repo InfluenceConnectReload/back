@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,11 +49,15 @@ public class Influencer {
 			inverseJoinColumns = @JoinColumn(name="niche_id"))
 	private Set<Niche> niches = new HashSet<>();
 	
-	public Influencer() {
-    }
+	@OneToMany(mappedBy = "id.influencer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<InfluencerSocialMedia> influencerSocialMedia = new HashSet<>();
 
+	public Influencer() {
+		
+	}
+	
 	public Influencer(Long id, String name, String email, LocalDate birthdate, String profilePhoto, String password,
-			String status, State state, Set<Niche> niches) {
+			String status, State state, Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -62,6 +68,7 @@ public class Influencer {
 		this.status = status;
 		this.state = state;
 		this.niches = niches;
+		this.influencerSocialMedia = influencerSocialMedia;
 	}
 
 	public Long getId() {
@@ -135,6 +142,16 @@ public class Influencer {
 	public void setNiches(Set<Niche> niches) {
 		this.niches = niches;
 	}
+
+	public Set<InfluencerSocialMedia> getInfluencerSocialMedia() {
+		return influencerSocialMedia;
+	}
+
+	public void setInfluencerSocialMedia(Set<InfluencerSocialMedia> influencerSocialMedia) {
+		this.influencerSocialMedia = influencerSocialMedia;
+	}
+	
+	
 	
 	
 }

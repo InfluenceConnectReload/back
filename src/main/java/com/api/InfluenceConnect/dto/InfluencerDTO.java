@@ -17,8 +17,9 @@ public class InfluencerDTO {
     private String password;
     private String status;
     private Long stateId; // Assuming you only need the state ID in the DTO
-    private Set<Long> nicheIds = new HashSet<Long>(); // Assuming you only need the niche IDs in the DTO
-
+    private Set<Long> nicheIds = new HashSet<Long>(); // Assuming you only need the niche IDs in the DTO 
+    private Set<InfluencerSocialMediaDTO> socialMediaDTOs = new HashSet<InfluencerSocialMediaDTO>();
+    
     public InfluencerDTO() {
     }
     
@@ -36,82 +37,91 @@ public class InfluencerDTO {
         }
         
         this.getNicheIds().clear();
-        // Assuming you have getter method for niches in Influencer class
         for (Niche niche : inf.getNiches()) {
             this.nicheIds.add(niche.getId());
         }
     }
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
+	public LocalDate getBirthdate() {
+		return birthdate;
+	}
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
+	public void setBirthdate(LocalDate birthdate) {
+		this.birthdate = birthdate;
+	}
 
-    public String getProfilePhoto() {
-        return profilePhoto;
-    }
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
 
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public Long getStateId() {
-        return stateId;
-    }
+	public Long getStateId() {
+		return stateId;
+	}
 
-    public void setStateId(Long stateId) {
-        this.stateId = stateId;
-    }
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
 
-    public Set<Long> getNicheIds() {
-        return nicheIds;
-    }
+	public Set<Long> getNicheIds() {
+		return nicheIds;
+	}
 
-    public void setNicheIds(Set<Long> nicheIds) {
-        this.nicheIds = nicheIds;
-    }
+	public void setNicheIds(Set<Long> nicheIds) {
+		this.nicheIds = nicheIds;
+	}
+
+	public Set<InfluencerSocialMediaDTO> getSocialMediaDTOs() {
+		return socialMediaDTOs;
+	}
+
+	public void setSocialMediaDTOs(Set<InfluencerSocialMediaDTO> socialMediaDTOs) {
+		this.socialMediaDTOs = socialMediaDTOs;
+	}   
+	
+	
 }
 
