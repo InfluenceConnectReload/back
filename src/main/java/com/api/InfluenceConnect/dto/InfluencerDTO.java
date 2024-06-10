@@ -32,6 +32,8 @@ public class InfluencerDTO {
         this.password = inf.getPassword();
         this.status = inf.getStatus();
         
+        //ESTÁ FALTANDO O CPF
+        
         if (inf.getState() != null) {
             this.stateId = inf.getState().getId();
         }

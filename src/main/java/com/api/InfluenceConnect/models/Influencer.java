@@ -23,6 +23,8 @@ import jakarta.persistence.Table;
 @Table(name="tb_influencers")
 public class Influencer {
 
+	//ESTÁ FALTANDO O CPF
+	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id; 
@@ -30,12 +32,11 @@ public class Influencer {
 	private String name;
 	private String email;
 	private LocalDate birthdate;
+	private String password;
+	private String status;
 	
 	@Column(name = "profile_photo", columnDefinition = "TEXT")
 	private String profilePhoto;
-	
-	private String password;
-	private String status;
 	
 	@ManyToOne
 	@JoinColumn(name="state_id")
