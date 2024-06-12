@@ -62,6 +62,7 @@ public class InfluencerService {
 		
 		inf.setBirthdate(iDTO.getBirthdate());
 		inf.setProfilePhoto(iDTO.getProfilePhoto());
+		inf.setCpf(iDTO.getCpf());
 		
 		//getState by id
 		State infState = stateRepo.getReferenceById(iDTO.getStateId());
