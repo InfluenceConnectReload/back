@@ -42,10 +42,10 @@ public class InfluencerService {
 	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
-		inf.setName(iDTO.getName());
-		inf.setEmail(iDTO.getEmail());
+//		inf.setName(iDTO.getName());
+//		inf.setEmail(iDTO.getEmail());
 		inf.setBirthdate(iDTO.getBirthdate());
-		inf.setPassword(iDTO.getPassword());
+//		inf.setPassword(iDTO.getPassword());
 		inf.setStatus(iDTO.getStatus());
 		inf.setProfilePhoto(iDTO.getProfilePhoto());
 		

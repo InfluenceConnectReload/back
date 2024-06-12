@@ -17,6 +17,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,12 +30,14 @@ public class Influencer {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id; 
 	
-	private String name;
-	private String email;
+	@OneToOne
+	@JoinColumn(name="user_id")
+    private User user;
+	
 	private LocalDate birthdate;
-	private String password;
 	private String status;
 	
+	//PERGUNTAR SE É UM BOM JEITO DE GUARDAR IMAGENS
 	@Column(name = "profile_photo", columnDefinition = "TEXT")
 	private String profilePhoto;
 	
@@ -53,20 +56,16 @@ public class Influencer {
 	@OneToMany(mappedBy = "id.influencer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<InfluencerSocialMedia> influencerSocialMedia = new HashSet<>();
 
-	public Influencer() {
-		
-	}
+	public Influencer() {}
 	
-	public Influencer(Long id, String name, String email, LocalDate birthdate, String profilePhoto, String password,
-			String status, State state, Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
+	public Influencer(Long id, User user, LocalDate birthdate, String status, String profilePhoto, State state,
+			Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.email = email;
+		this.user = user;
 		this.birthdate = birthdate;
-		this.profilePhoto = profilePhoto;
-		this.password = password;
 		this.status = status;
+		this.profilePhoto = profilePhoto;
 		this.state = state;
 		this.niches = niches;
 		this.influencerSocialMedia = influencerSocialMedia;
@@ -80,20 +79,12 @@ public class Influencer {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public User getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public LocalDate getBirthdate() {
@@ -104,28 +95,20 @@ public class Influencer {
 		this.birthdate = birthdate;
 	}
 
-	public String getProfilePhoto() {
-		return profilePhoto;
-	}
-
-	public void setProfilePhoto(String profilePhoto) {
-		this.profilePhoto = profilePhoto;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 
 	public State getState() {
@@ -150,9 +133,7 @@ public class Influencer {
 
 	public void setInfluencerSocialMedia(Set<InfluencerSocialMedia> influencerSocialMedia) {
 		this.influencerSocialMedia = influencerSocialMedia;
-	}
-	
-	
+	}	
 	
 	
 }

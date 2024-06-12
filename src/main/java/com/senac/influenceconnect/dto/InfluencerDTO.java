@@ -23,13 +23,9 @@ public class InfluencerDTO {
     public InfluencerDTO() {
     }
     
-    public InfluencerDTO(Influencer inf) {
-    	this.id = inf.getId();
-        this.name = inf.getName();
-        this.email = inf.getEmail();
+    public InfluencerDTO(Influencer inf) {;
         this.birthdate = inf.getBirthdate();
         this.profilePhoto = inf.getProfilePhoto();
-        this.password = inf.getPassword();
         this.status = inf.getStatus();
         
         //ESTÁ FALTANDO O CPF
