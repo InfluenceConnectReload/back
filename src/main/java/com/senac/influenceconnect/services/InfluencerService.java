@@ -61,7 +61,6 @@ public class InfluencerService {
 		inf.setUser(infUser);
 		
 		inf.setBirthdate(iDTO.getBirthdate());
-		inf.setStatus(iDTO.getStatus());
 		inf.setProfilePhoto(iDTO.getProfilePhoto());
 		
 		//getState by id

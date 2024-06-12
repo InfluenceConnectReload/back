@@ -24,7 +24,7 @@ public class InfluencerDTO {
     public InfluencerDTO() {
     }
     
-	public InfluencerDTO(String email, String password, String name, LocalDate birthdate, String status, String cpf,
+	public InfluencerDTO(String email, String password, String name, LocalDate birthdate, Influencer.StatusType status, String cpf,
 			String profilePhoto, Long stateId, Set<Long> nicheIds,
 			Set<InfluencerSocialMediaDTO> influencerSocialMedia) {
 		super();
@@ -32,7 +32,7 @@ public class InfluencerDTO {
 		this.password = password;
 		this.name = name;
 		this.birthdate = birthdate;
-		this.status = status;
+		this.status = status.toString();
 		this.cpf = cpf;
 		this.profilePhoto = profilePhoto;
 		this.stateId = stateId;
@@ -45,7 +45,7 @@ public class InfluencerDTO {
 	        this.password = inf.getUser().getPassword();
 	        this.name = inf.getUser().getName();
 	        this.birthdate = inf.getBirthdate();
-	        this.status = inf.getStatus();
+	        this.status = inf.getStatus().toString();
 	        this.cpf = inf.getCpf();
 	        this.profilePhoto = inf.getProfilePhoto();
 	        this.stateId = inf.getState().getId();

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,8 +25,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="tb_influencers")
 public class Influencer {
-
-	//ESTÁ FALTANDO O CPF
+	
+	public static enum StatusType{
+		active,
+        inactive,
+        pending
+	}
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -35,7 +41,9 @@ public class Influencer {
     private User user;
 	
 	private LocalDate birthdate;
-	private String status;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusType status = StatusType.pending;
 	private String cpf;
 	
 	//PERGUNTAR SE É UM BOM JEITO DE GUARDAR IMAGENS
@@ -59,12 +67,11 @@ public class Influencer {
 
 	public Influencer() {}
 
-	public Influencer( User user, LocalDate birthdate, String status, String cpf, String profilePhoto,
+	public Influencer( User user, LocalDate birthdate, StatusType status, String cpf, String profilePhoto,
 			State state, Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
 		super();
 		this.user = user;
 		this.birthdate = birthdate;
-		this.status = status;
 		this.cpf = cpf;
 		this.profilePhoto = profilePhoto;
 		this.state = state;
@@ -96,11 +103,11 @@ public class Influencer {
 		this.birthdate = birthdate;
 	}
 
-	public String getStatus() {
+	public StatusType getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusType status) {
 		this.status = status;
 	}
 
