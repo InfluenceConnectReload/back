@@ -1,6 +1,7 @@
 package com.senac.influenceconnect.services;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,18 @@ public class InfluencerService {
 		
 		Influencer newInf = influenceRepo.save(inf);
 		return new InfluencerDTO(newInf);
+	}
+	
+	public boolean isEmailAvailable(String email) {
+		List<User> allUsers = userRepo.findAll();
+		
+		for (User user : allUsers) {
+            if(user.getEmail().equals(email)) {
+                return false;
+            }
+        }
+		
+		return true;
 	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {

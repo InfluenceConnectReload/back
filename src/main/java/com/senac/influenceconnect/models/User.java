@@ -29,6 +29,8 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Influencer influencer;
 
+	public User() {}
+	
 	public User( Role role, String name, String email, String password) {
 		super();
 		this.role = role;
