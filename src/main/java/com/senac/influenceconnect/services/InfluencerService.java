@@ -11,12 +11,16 @@ import com.senac.influenceconnect.dto.InfluencerSocialMediaDTO;
 import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
 import com.senac.influenceconnect.models.Niche;
+import com.senac.influenceconnect.models.Role;
 import com.senac.influenceconnect.models.SocialMedia;
 import com.senac.influenceconnect.models.State;
+import com.senac.influenceconnect.models.User;
 import com.senac.influenceconnect.repositories.InfluencerRepository;
 import com.senac.influenceconnect.repositories.NicheRepository;
+import com.senac.influenceconnect.repositories.RoleRepository;
 import com.senac.influenceconnect.repositories.SocialMediaRepository;
 import com.senac.influenceconnect.repositories.StateRepository;
+import com.senac.influenceconnect.repositories.UserRepository;
 
 @Service
 public class InfluencerService {
@@ -33,6 +37,12 @@ public class InfluencerService {
 	@Autowired
     private SocialMediaRepository socialMediaRepo;	
 	
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private RoleRepository roleRepo;
+	
 	public InfluencerDTO registerInfluencer(InfluencerDTO iDTO) {
 		Influencer inf = new Influencer();
 		copyInfluencerDTO(iDTO, inf);
@@ -42,10 +52,15 @@ public class InfluencerService {
 	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
-//		inf.setName(iDTO.getName());
-//		inf.setEmail(iDTO.getEmail());
+		//CRIAR UM USER
+		Role userRole = roleRepo.findById((long)2).orElseThrow();
+		User user = new User(userRole,iDTO.getName(), iDTO.getEmail(), iDTO.getPassword());
+		
+		User infUser = userRepo.save(user);
+		
+		inf.setUser(infUser);
+		
 		inf.setBirthdate(iDTO.getBirthdate());
-//		inf.setPassword(iDTO.getPassword());
 		inf.setStatus(iDTO.getStatus());
 		inf.setProfilePhoto(iDTO.getProfilePhoto());
 		
@@ -63,7 +78,7 @@ public class InfluencerService {
 		
 		// Lidar com redes sociais
 	    Set<InfluencerSocialMedia> influencerSocialMedias = new HashSet<>();
-	    for (InfluencerSocialMediaDTO socialMediaDTO : iDTO.getSocialMediaDTOs()) {
+	    for (InfluencerSocialMediaDTO socialMediaDTO : iDTO.getInfluencerSocialMedia()) {
 	        SocialMedia socialMedia = socialMediaRepo.getReferenceById(socialMediaDTO.getSocialMediaId());
 	        InfluencerSocialMedia influencerSocialMedia = new InfluencerSocialMedia(inf, socialMedia, socialMediaDTO.getLink());
 	        influencerSocialMedias.add(influencerSocialMedia);

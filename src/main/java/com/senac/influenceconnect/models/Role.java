@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 @Table(name="tb_roles")
 public class Role {
 	
-	public enum UserType {
+	public static enum UserType {
 		adm,
 		influencer,
 		company
@@ -36,11 +36,9 @@ public class Role {
         
     }
 
-	public Role(Long id, UserType type, Set<User> users) {
+	public Role(UserType type) {
 		super();
-		this.id = id;
 		this.type = type;
-		this.users = users;
 	}
 
 	public Long getId() {

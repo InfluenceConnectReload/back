@@ -36,6 +36,7 @@ public class Influencer {
 	
 	private LocalDate birthdate;
 	private String status;
+	private String cpf;
 	
 	//PERGUNTAR SE É UM BOM JEITO DE GUARDAR IMAGENS
 	@Column(name = "profile_photo", columnDefinition = "TEXT")
@@ -57,14 +58,14 @@ public class Influencer {
 	private Set<InfluencerSocialMedia> influencerSocialMedia = new HashSet<>();
 
 	public Influencer() {}
-	
-	public Influencer(Long id, User user, LocalDate birthdate, String status, String profilePhoto, State state,
-			Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
+
+	public Influencer( User user, LocalDate birthdate, String status, String cpf, String profilePhoto,
+			State state, Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
 		super();
-		this.id = id;
 		this.user = user;
 		this.birthdate = birthdate;
 		this.status = status;
+		this.cpf = cpf;
 		this.profilePhoto = profilePhoto;
 		this.state = state;
 		this.niches = niches;
@@ -103,6 +104,14 @@ public class Influencer {
 		this.status = status;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getProfilePhoto() {
 		return profilePhoto;
 	}
@@ -133,7 +142,8 @@ public class Influencer {
 
 	public void setInfluencerSocialMedia(Set<InfluencerSocialMedia> influencerSocialMedia) {
 		this.influencerSocialMedia = influencerSocialMedia;
-	}	
+	}
+	
 	
 	
 }
