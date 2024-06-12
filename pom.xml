@@ -8,8 +8,8 @@
 		<version>3.3.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.api</groupId>
-	<artifactId>InfluenceConnect</artifactId>
+	<groupId>com.senac</groupId>
+	<artifactId>influenceconnect</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>InfluenceConnect</name>
 	<description>A api do projeto Influence Connect</description>
