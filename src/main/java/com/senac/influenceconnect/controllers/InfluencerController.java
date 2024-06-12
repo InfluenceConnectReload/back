@@ -34,7 +34,7 @@ public class InfluencerController {
 		EmailAvailabilityResponse response = new EmailAvailabilityResponse();
 		response.email = req.getEmail();
 		response.isAvailable = isAvailable;
-		response.message = (isAvailable?"O email está disponível":"Email está sendo usado");
+		response.message = (isAvailable?"O email está disponível":"Email est");
 		
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
