@@ -3,7 +3,6 @@ package com.senac.influenceconnect.dto;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
 
 public class InfluencerSocialMediaDTO {
-    private Long influencerId;
     private Long socialMediaId;
     private String link;
 
@@ -13,15 +12,13 @@ public class InfluencerSocialMediaDTO {
     
     
 
-    public InfluencerSocialMediaDTO(Long influencerId, Long socialMediaId, String link) {
+    public InfluencerSocialMediaDTO(Long socialMediaId, String link) {
 		super();
-		this.influencerId = influencerId;
 		this.socialMediaId = socialMediaId;
 		this.link = link;
 	}
     
     public InfluencerSocialMediaDTO(InfluencerSocialMedia infSocialMedia) {
-    	this.influencerId = infSocialMedia.getInfluencer().getId();
         this.socialMediaId = infSocialMedia.getSocialMedia().getId();
         this.link = infSocialMedia.getLink();
     }
@@ -29,13 +26,6 @@ public class InfluencerSocialMediaDTO {
 
 
 	// Getters e Setters
-    public Long getInfluencerId() {
-        return influencerId;
-    }
-
-    public void setInfluencerId(Long influencerId) {
-        this.influencerId = influencerId;
-    }
 
     public Long getSocialMediaId() {
         return socialMediaId;
