@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senac.influenceconnect.dto.LoginRequestDTO;
+import com.senac.influenceconnect.dto.LoginResponseDTO;
+import com.senac.influenceconnect.models.User;
 import com.senac.influenceconnect.requests.EmailAvailabilityRequest;
 import com.senac.influenceconnect.services.UserService;
 
@@ -28,6 +31,25 @@ public class UserController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
+	
+	@PostMapping(value="/login")
+	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO logDTO) {
+		User u= userServ.login(logDTO.getEmail(), logDTO.getPassword());
+		LoginResponseDTO res = new LoginResponseDTO();
+		
+		if(u!=null) {
+			res.setUser(u);
+			res.setMessage("Login realizado com sucesso!");
+			res.setSucess("true");
+			res.setToken("token super seguro");
+            return ResponseEntity.status(HttpStatus.OK).body(res);
+        }
+		
+		res.setSucess("false");
+		res.setMessage("Usuário ou senha inválidos!");
+		
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(res);
+    }
 	
 	private class EmailAvailabilityResponse{
 		public String email;

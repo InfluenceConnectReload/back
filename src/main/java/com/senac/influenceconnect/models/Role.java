@@ -3,6 +3,8 @@ package com.senac.influenceconnect.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -29,6 +31,7 @@ public class Role {
 	@Enumerated(EnumType.STRING)
 	private UserType type;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="role")
 	private Set<User> users = new HashSet<User>();
 	

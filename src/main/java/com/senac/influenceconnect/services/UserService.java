@@ -25,4 +25,16 @@ public class UserService {
 		
 		return true;
 	}
+	
+	public User login(String email, String password) {
+		List<User> allUsers = userRepo.findAll();
+		
+		for(User u: allUsers) {
+			if(u.getEmail().equals(email) && u.getPassword().equals(password)) {
+                return u;
+            }
+		}
+		
+		return null;
+	}
 }
