@@ -45,10 +45,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(res);
         }
 		
+		res.setUser(u);
 		res.setSucess("false");
 		res.setMessage("Usuário ou senha inválidos!");
+		res.setToken("");
 		
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(res);
+		return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 	
 	private class EmailAvailabilityResponse{

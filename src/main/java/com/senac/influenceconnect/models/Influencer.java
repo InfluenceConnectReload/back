@@ -63,6 +63,7 @@ public class Influencer {
 			inverseJoinColumns = @JoinColumn(name="niche_id"))
 	private Set<Niche> niches = new HashSet<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.influencer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<InfluencerSocialMedia> influencerSocialMedia = new HashSet<>();
 

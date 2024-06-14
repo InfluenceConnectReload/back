@@ -3,6 +3,8 @@ package com.senac.influenceconnect.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class SocialMedia {
 	
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="id.socialMedia")
 	private Set<InfluencerSocialMedia> influencerSocialMedias = new HashSet<InfluencerSocialMedia>();
 	
