@@ -1,5 +1,6 @@
 package com.senac.influenceconnect.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,17 +53,18 @@ public class InfluencerService {
 		return new InfluencerDTO(newInf);
 	}
 	
-	public boolean isEmailAvailable(String email) {
-		List<User> allUsers = userRepo.findAll();
-		
-		for (User user : allUsers) {
-            if(user.getEmail().equals(email)) {
-                return false;
-            }
+	public List<InfluencerDTO> getAllInfluencers(){
+		List<Influencer> allInfluencers = influenceRepo.findAll();
+        List<InfluencerDTO> allInfluencersDTO = new ArrayList<>();
+        
+        for (Influencer inf : allInfluencers) {
+        	inf.getUser().setPassword(null);
+            allInfluencersDTO.add(new InfluencerDTO(inf));
         }
-		
-		return true;
+        
+        return allInfluencersDTO;
 	}
+	
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
 		//CRIAR UM USER

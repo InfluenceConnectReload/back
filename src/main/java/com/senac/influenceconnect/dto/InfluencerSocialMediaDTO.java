@@ -10,8 +10,6 @@ public class InfluencerSocialMediaDTO {
     public InfluencerSocialMediaDTO() {
     }
     
-    
-
     public InfluencerSocialMediaDTO(Long socialMediaId, String link) {
 		super();
 		this.socialMediaId = socialMediaId;
