@@ -29,11 +29,7 @@ public class RoleService {
 	}
 	
 	private void createDefaultRoles() {
-		UserType[] roles = {
-                UserType.ADM,
-                UserType.INFLUENCER,
-                UserType.COMPANY
-        };
+		UserType[] roles = UserType.values();
         
         for(int i =0; i < roles.length;++i) {
             Role newRole = new Role(roles[i]);
