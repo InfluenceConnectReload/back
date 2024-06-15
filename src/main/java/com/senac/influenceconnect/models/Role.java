@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.senac.influenceconnect.enums.UserType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,11 +19,11 @@ import jakarta.persistence.Table;
 @Table(name="tb_roles")
 public class Role {
 	
-	public static enum UserType {
-		adm,
-		influencer,
-		company
-	}
+//	public static enum UserType {
+//		adm,
+//		influencer,
+//		company
+//	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

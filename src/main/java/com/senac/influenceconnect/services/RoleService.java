@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senac.influenceconnect.enums.UserType;
 import com.senac.influenceconnect.models.Role;
-import com.senac.influenceconnect.models.Role.UserType;
+//import com.senac.influenceconnect.models.Role.UserType;
 import com.senac.influenceconnect.repositories.RoleRepository;
 
 @Service
@@ -29,9 +30,9 @@ public class RoleService {
 	
 	private void createDefaultRoles() {
 		UserType[] roles = {
-                Role.UserType.adm,
-                Role.UserType.influencer,
-                Role.UserType.company
+                UserType.ADM,
+                UserType.INFLUENCER,
+                UserType.COMPANY
         };
         
         for(int i =0; i < roles.length;++i) {
