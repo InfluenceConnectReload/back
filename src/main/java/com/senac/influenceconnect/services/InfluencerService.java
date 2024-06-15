@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
 import com.senac.influenceconnect.dto.InfluencerSocialMediaDTO;
@@ -23,6 +25,8 @@ import com.senac.influenceconnect.repositories.RoleRepository;
 import com.senac.influenceconnect.repositories.SocialMediaRepository;
 import com.senac.influenceconnect.repositories.StateRepository;
 import com.senac.influenceconnect.repositories.UserRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class InfluencerService {
@@ -63,6 +67,20 @@ public class InfluencerService {
         }
         
         return allInfluencersDTO;
+	}
+	
+	public InfluencerDTO getInfluencerById(long id) {
+		try {
+	        Influencer inf = influenceRepo.getReferenceById(id);
+	        InfluencerDTO infDTO = new InfluencerDTO(inf);
+	        return infDTO;
+	    } catch (EntityNotFoundException e) {
+	        // Log the exception or handle it appropriately
+	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Influencer not found", e);
+	    } catch (Exception e) {
+	        // Log the exception or handle it appropriately
+	        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", e);
+	    }
 	}
 	
 	

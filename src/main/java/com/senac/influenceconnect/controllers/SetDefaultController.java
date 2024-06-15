@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.models.Role;
 import com.senac.influenceconnect.repositories.RoleRepository;
+import com.senac.influenceconnect.services.MarketingChannelService;
 import com.senac.influenceconnect.services.NicheService;
 import com.senac.influenceconnect.services.RoleService;
 import com.senac.influenceconnect.services.SocialMediaService;
@@ -39,6 +41,9 @@ public class SetDefaultController {
 	@Autowired
 	private StateService stateServ;
 	
+	@Autowired
+    private MarketingChannelService marketingChannelServ;
+	
 	@PostMapping
 	public ResponseEntity<String> setDefault(){
 		List<Role> roles = roleRepo.findAll();
@@ -48,6 +53,7 @@ public class SetDefaultController {
 			nicheServ.setDefaultNiches();
 			socialMediaServ.setDefaultSocialMedia();
 			stateServ.setDefaultStates();
+			marketingChannelServ.setDefaultMarketingChannels();
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body("Tabelas populadas com sucesso!");
 		}
