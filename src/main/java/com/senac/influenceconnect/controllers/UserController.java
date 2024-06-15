@@ -27,7 +27,7 @@ public class UserController {
 		EmailAvailabilityResponse response = new EmailAvailabilityResponse();
 		response.email = req.getEmail();
 		response.isAvailable = isAvailable;
-		response.message = (isAvailable?"O email está disponível":"Email está sendo usado");
+		response.setMessage((isAvailable?"O email está disponível":"Email está sendo usado"));
 		
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
@@ -56,7 +56,31 @@ public class UserController {
 	private class EmailAvailabilityResponse{
 		public String email;
 		public boolean isAvailable;
-		public String message;
+		private String message;
+		
+        public String getEmail() {
+            return email;
+        }
+        
+        public void setEmail(String email) {
+            this.email = email;
+        }
+        
+        public boolean isAvailable() {
+            return isAvailable;
+        }
+        
+        public void setAvailable(boolean isAvailable) {
+            this.isAvailable = isAvailable;
+        }
+		public String getMessage() {
+			return message;
+		}
+		public void setMessage(String message) {
+			this.message = message;
+		}
+		
+			
 	}
 	
 }

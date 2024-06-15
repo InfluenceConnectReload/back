@@ -1,7 +1,6 @@
 package com.senac.influenceconnect.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.senac.influenceconnect.models.User;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

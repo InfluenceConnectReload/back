@@ -1,6 +1,5 @@
 package com.senac.influenceconnect.config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +20,6 @@ public class SwaggerConfig {
 	@Bean
 	OpenAPI myOpenAPI() {
 		Server server = new Server();
-		
-		List<Contact> contacts = new ArrayList<Contact>();
 		
 		server.setUrl(devUrl);
 		server.setDescription("Server URL - ambiente de desenvolvimento");
