@@ -12,18 +12,4 @@ import com.senac.influenceconnect.services.SocialMediaService;
 @RequestMapping(value="/socialmedias")
 public class SocialMediaController {
 	
-	@Autowired
-	private SocialMediaService socialMediaServ;
-	
-	@GetMapping(value="/setDefault")
-	public ResponseEntity<Void> setDefaultSocialMedia() {
-		boolean wasCreated = socialMediaServ.setDefaultSocialMedia();
-        
-        if(wasCreated) {
-            return ResponseEntity.status(201).build();
-        }
-        
-        return ResponseEntity.status(300).build();
-	}
-	
 }

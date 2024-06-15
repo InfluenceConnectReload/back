@@ -12,18 +12,4 @@ import com.senac.influenceconnect.services.NicheService;
 @RequestMapping(value = "/niches")
 public class NicheController {
 	
-	@Autowired
-	private NicheService nicheServ;
-	
-	@GetMapping(value = "/setDefault")
-	public ResponseEntity<String> setDefaultNiches() {
-		boolean wasCreated = nicheServ.setDefaultNiches();
-        
-        if(wasCreated) {
-            return ResponseEntity.status(201).build();
-        }
-        
-        return ResponseEntity.status(300).build();
-		
-	}
 }

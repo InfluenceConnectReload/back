@@ -3,36 +3,30 @@ package com.senac.influenceconnect.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.senac.influenceconnect.models.Company;
-import com.senac.influenceconnect.models.Niche;
+import com.senac.influenceconnect.models.User;
 
 public class CompanyDTO {
 
 	private Long id;
-    private String name;
-    private String password;
+    private User user;
     private String cnpj;
-    private String email;
     private String profileLogo; // base64
     private Set<Long> nicheIds = new HashSet<Long>();
     private Set<CompanyMarketingChannelDTO> companyMarketingChannels;
     
     public CompanyDTO() {
     }
-    
-    public CompanyDTO(Company comp) {
-        this.id = comp.getId();
-        this.name = comp.getName();
-        this.email = comp.getEmail();
-        this.profileLogo = comp.getProfileLogo();
-        this.password =  comp.getPassword();
-        this.cnpj = comp.getCnpj();
-        
-        this.nicheIds.clear();
-        for (Niche niche : comp.getNiches()) {
-            this.nicheIds.add(niche.getId());
-        }
-    }
+
+	public CompanyDTO(Long id, User user, String cnpj, String profileLogo, Set<Long> nicheIds,
+			Set<CompanyMarketingChannelDTO> companyMarketingChannels) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.cnpj = cnpj;
+		this.profileLogo = profileLogo;
+		this.nicheIds = nicheIds;
+		this.companyMarketingChannels = companyMarketingChannels;
+	}
 
 	public Long getId() {
 		return id;
@@ -42,20 +36,12 @@ public class CompanyDTO {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public User getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getCnpj() {
@@ -64,14 +50,6 @@ public class CompanyDTO {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getProfileLogo() {
@@ -97,6 +75,8 @@ public class CompanyDTO {
 	public void setCompanyMarketingChannels(Set<CompanyMarketingChannelDTO> companyMarketingChannels) {
 		this.companyMarketingChannels = companyMarketingChannels;
 	}
+    
+    
     
     
 }

@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,13 +25,15 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;	
-	private String password;
 	private String cnpj;
-	private String email;
 	
 	@Column(name = "profile_logo", columnDefinition = "TEXT")
 	private String profileLogo; //base64
+	
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="user_id")
+    private User user;
 	
 	@JsonIgnore 
 	@ManyToMany
@@ -50,21 +53,6 @@ public class Company {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public String getCnpj() {
 		return cnpj;
@@ -72,14 +60,6 @@ public class Company {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getProfileLogo() {

@@ -13,15 +13,4 @@ import com.senac.influenceconnect.services.RoleService;
 @RequestMapping(value = "/roles")
 public class RoleController {
 
-	@Autowired
-    private RoleService roleServ;
-	
-	@PostMapping(value = "/setDefault")
-	public ResponseEntity<Void> setDefaultRoles(){
-		boolean wasSet = roleServ.setDefaultRoles();
-		if(wasSet) {
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-	}
 }

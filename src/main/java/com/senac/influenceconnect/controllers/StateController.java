@@ -13,18 +13,5 @@ import com.senac.influenceconnect.services.StateService;
 @RestController
 @RequestMapping(value="/states")
 public class StateController {
-	
-	@Autowired
-	private StateService stateServ;
-	
-	@GetMapping(value="/setDefault")
-    public ResponseEntity<Void> setDefaultStates() {
-        boolean wasCreated = stateServ.setDefaultStates();
-        
-        if(wasCreated) {
-        	return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        
-       return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+
 }
