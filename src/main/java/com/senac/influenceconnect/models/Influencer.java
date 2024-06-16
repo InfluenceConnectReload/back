@@ -51,6 +51,9 @@ public class Influencer {
 	@Column(name = "profile_photo", columnDefinition = "TEXT")
 	private String profilePhoto;
 	
+	@ManyToMany(mappedBy="influencers")
+	private Set<Campaign> campaigns= new HashSet<>();
+	
 	@ManyToOne
 	@JoinColumn(name="state_id")
 	private State state;

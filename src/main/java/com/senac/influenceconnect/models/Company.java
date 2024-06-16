@@ -30,6 +30,9 @@ public class Company {
 	@Column(name = "profile_logo", columnDefinition = "TEXT")
 	private String profileLogo; //base64
 	
+	@OneToMany(mappedBy="company")
+	private Set<Campaign> campaigns = new HashSet<>();
+	
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL) //CERTIFICA DE CRIAR O USER QUANDO A COMPANY É CRIADA- DEVE DELETAR TAMBÉM
 	@JoinColumn(name="user_id")

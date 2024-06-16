@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -22,6 +23,9 @@ public class MarketingChannel {
 	
 	@OneToMany(mappedBy="id.marketingChannel")
 	private Set<CompanyMarketingChannel> companyMarketingChannel= new HashSet<>();
+	
+	@ManyToMany(mappedBy="marketingChannels")
+	private Set<Campaign> campaign= new HashSet<>();
 	
 	public MarketingChannel() {
         

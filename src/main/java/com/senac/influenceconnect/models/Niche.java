@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +22,9 @@ public class Niche {
 	
 	@ManyToMany(mappedBy="niches")
 	private Set<Influencer> influencers = new HashSet<>();
+	
+	@OneToMany(mappedBy="niche")
+	private Set<Campaign> campaigns = new HashSet<>();
 	
 	public Niche() {
         
