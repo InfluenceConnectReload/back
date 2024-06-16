@@ -31,7 +31,7 @@ public class Company {
 	private String profileLogo; //base64
 	
 	@JsonIgnore
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL) //CERTIFICA DE CRIAR O USER QUANDO A COMPANY É CRIADA- DEVE DELETAR TAMBÉM
 	@JoinColumn(name="user_id")
     private User user;
 	
@@ -45,6 +45,21 @@ public class Company {
 	@OneToMany(mappedBy = "id.company", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<CompanyMarketingChannel> companyMarketingChannel = new HashSet<>();
 
+	public Company() {
+        
+    }
+
+	public Company(Long id, String cnpj, String profileLogo, User user, Set<Niche> niches,
+			Set<CompanyMarketingChannel> companyMarketingChannel) {
+		super();
+		this.id = id;
+		this.cnpj = cnpj;
+		this.profileLogo = profileLogo;
+		this.user = user;
+		this.niches = niches;
+		this.companyMarketingChannel = companyMarketingChannel;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -52,7 +67,6 @@ public class Company {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getCnpj() {
 		return cnpj;
@@ -70,6 +84,14 @@ public class Company {
 		this.profileLogo = profileLogo;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Set<Niche> getNiches() {
 		return niches;
 	}
@@ -85,7 +107,4 @@ public class Company {
 	public void setCompanyMarketingChannel(Set<CompanyMarketingChannel> companyMarketingChannel) {
 		this.companyMarketingChannel = companyMarketingChannel;
 	}
-	
-	
-	
 }

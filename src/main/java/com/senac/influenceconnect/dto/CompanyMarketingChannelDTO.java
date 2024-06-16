@@ -1,21 +1,26 @@
 package com.senac.influenceconnect.dto;
 
+import com.senac.influenceconnect.models.CompanyMarketingChannel;
+
 public class CompanyMarketingChannelDTO {
-	private Long companyId;
 	private Long marketingChannelId;
 	private String link;
 	
 	public CompanyMarketingChannelDTO() {
 		
 	}
-
-	public Long getCompanyId() {
-		return companyId;
+	
+	public CompanyMarketingChannelDTO(Long companyId, Long marketingChannelId, String link) {
+		super();
+		this.marketingChannelId = marketingChannelId;
+		this.link = link;
 	}
-
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
+	
+	public CompanyMarketingChannelDTO(CompanyMarketingChannel c) {
+		this.marketingChannelId = c.getMarketingChannel().getId();
+		this.link = c.getLink();
 	}
+	
 
 	public Long getMarketingChannelId() {
 		return marketingChannelId;

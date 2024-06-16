@@ -1,32 +1,54 @@
 package com.senac.influenceconnect.dto;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import com.senac.influenceconnect.models.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.senac.influenceconnect.models.Company;
 
 public class CompanyDTO {
 
+	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
-    private User user;
     private String cnpj;
-    private String profileLogo; // base64
-    private Set<Long> nicheIds = new HashSet<Long>();
+    private String profileLogo;
+    private String name;
+    private String email;
+    @JsonProperty(access= Access.WRITE_ONLY)
+    private String password;
+    private Set<Long> nicheIds;
     private Set<CompanyMarketingChannelDTO> companyMarketingChannels;
     
     public CompanyDTO() {
+        
     }
-
-	public CompanyDTO(Long id, User user, String cnpj, String profileLogo, Set<Long> nicheIds,
-			Set<CompanyMarketingChannelDTO> companyMarketingChannels) {
+    
+	public CompanyDTO(Long id, String cnpj, String profileLogo, String name, String email, String password,
+			Set<Long> nicheIds, Set<CompanyMarketingChannelDTO> companyMarketingChannels) {
 		super();
 		this.id = id;
-		this.user = user;
 		this.cnpj = cnpj;
 		this.profileLogo = profileLogo;
+		this.name = name;
+		this.email = email;
+		this.password = password;
 		this.nicheIds = nicheIds;
 		this.companyMarketingChannels = companyMarketingChannels;
 	}
+
+
+
+	public CompanyDTO(Company comp) {
+    	this.id = comp.getId();
+    	this.cnpj = comp.getCnpj();
+    	this.profileLogo = comp.getProfileLogo();
+    	this.name = comp.getUser().getName();
+    	this.email = comp.getUser().getEmail();
+    	this.password = comp.getUser().getPassword();
+    	this.nicheIds = comp.getNiches().stream().map(n -> n.getId()).collect(Collectors.toSet());
+    	this.companyMarketingChannels = comp.getCompanyMarketingChannel().stream().map(c -> new CompanyMarketingChannelDTO(c)).collect(Collectors.toSet());
+    }
 
 	public Long getId() {
 		return id;
@@ -34,14 +56,6 @@ public class CompanyDTO {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getCnpj() {
@@ -60,6 +74,30 @@ public class CompanyDTO {
 		this.profileLogo = profileLogo;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Set<Long> getNicheIds() {
 		return nicheIds;
 	}
@@ -75,8 +113,4 @@ public class CompanyDTO {
 	public void setCompanyMarketingChannels(Set<CompanyMarketingChannelDTO> companyMarketingChannels) {
 		this.companyMarketingChannels = companyMarketingChannels;
 	}
-    
-    
-    
-    
 }

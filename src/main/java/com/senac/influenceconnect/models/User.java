@@ -28,6 +28,9 @@ public class User {
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Influencer influencer;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Company company;
 
 	public User() {}
 	
