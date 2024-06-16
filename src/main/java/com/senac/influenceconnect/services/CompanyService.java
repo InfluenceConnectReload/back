@@ -1,6 +1,8 @@
 package com.senac.influenceconnect.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,19 @@ public class CompanyService {
         
         return new CompanyDTO(savedComp);
       }
+	
+	public List<CompanyDTO> getAllCompanys(){
+		List<Company> companies = companyRepo.findAll();
+		List<CompanyDTO> companiesDTO = new ArrayList<CompanyDTO>();
+		
+		for (Company c : companies) {
+			CompanyDTO companyDTO = new CompanyDTO(c);
+			
+			companiesDTO.add(companyDTO);
+        }
+		
+		return companiesDTO;
+	}
 	
 	public Company transformDTO_intoEntity(CompanyDTO cDTO) {
 		Company c = new Company();

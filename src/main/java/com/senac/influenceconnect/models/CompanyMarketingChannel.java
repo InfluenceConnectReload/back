@@ -15,6 +15,10 @@ public class CompanyMarketingChannel {
 	
 	private String link;
 	
+	public CompanyMarketingChannel() {
+		
+	}
+	
 	public CompanyMarketingChannel(Company company, MarketingChannel marketingChannel, String link) {
 		super();
 		this.id.setCompany(company);
