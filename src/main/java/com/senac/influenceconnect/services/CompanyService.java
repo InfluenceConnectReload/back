@@ -67,7 +67,33 @@ public class CompanyService {
 		return null;
 	}
 	
-	public Company transformDTO_intoEntity(CompanyDTO cDTO) {
+	public void setDefaultCompanies() {		
+		for( int i =0 ;i < 10; ++i) {
+			Role role = roleRepo.findById((long) 3).orElseThrow();
+			String userName = "Empresa " + (i+1);
+			String userEmail = "empresa"+(i+1)+"@gmail.com";
+			String userPassword = "12345678Aa!";
+			User user = new User(role, userName, userEmail, userPassword);
+			Set<Niche> nichesList = new HashSet<>();
+			nichesList.add(nicheRepo.getReferenceById((long)2));
+			nichesList.add(nicheRepo.getReferenceById((long)3));
+			Set<CompanyMarketingChannel> marketList = new HashSet<>();
+			
+			Company c = new Company(null, "38.477.102/0001-75",
+                    "https://freesvg.org/img/logo-generic.png", user,
+                    nichesList, null);
+			marketList.add(new CompanyMarketingChannel(c,
+					markChannelRepo.getReferenceById((long)1),
+					"www.facebook.com"
+					));
+			c.setCompanyMarketingChannel(marketList);
+			
+			
+			companyRepo.save(c);
+		}
+	}
+	
+	private Company transformDTO_intoEntity(CompanyDTO cDTO) {
 		Company c = new Company();
 		
 		Role role = roleRepo.findById((long) 3).orElseThrow();

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.models.Role;
 import com.senac.influenceconnect.repositories.RoleRepository;
+import com.senac.influenceconnect.services.CompanyService;
 import com.senac.influenceconnect.services.MarketingChannelService;
 import com.senac.influenceconnect.services.NicheService;
 import com.senac.influenceconnect.services.RoleService;
@@ -26,21 +27,18 @@ public class SetDefaultController {
 
 	@Autowired
     private RoleService roleServ;
-	
 	@Autowired
 	private RoleRepository roleRepo;
-	
 	@Autowired
 	private NicheService nicheServ;
-	
 	@Autowired
 	private SocialMediaService socialMediaServ;
-	
 	@Autowired
 	private StateService stateServ;
-	
 	@Autowired
     private MarketingChannelService marketingChannelServ;
+	@Autowired
+	private CompanyService companyServ;	
 	
 	@PostMapping
 	public ResponseEntity<String> setDefault(){
@@ -59,5 +57,12 @@ public class SetDefaultController {
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Tabelas não criadas");
 		
 	}
+	
+	@PostMapping(value= "/companies")
+	public ResponseEntity<String> setDefaultCompanies(){
+        companyServ.setDefaultCompanies();
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body("Tabela de empresas populadas com sucesso!");
+    }
 	
 }

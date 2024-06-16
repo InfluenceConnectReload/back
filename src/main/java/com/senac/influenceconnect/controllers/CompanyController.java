@@ -15,7 +15,7 @@ import com.senac.influenceconnect.dto.CompanyDTO;
 import com.senac.influenceconnect.services.CompanyService;
 
 @RestController
-@RequestMapping(value ="/companys")
+@RequestMapping(value ="/companies")
 public class CompanyController {
 
 	@Autowired 

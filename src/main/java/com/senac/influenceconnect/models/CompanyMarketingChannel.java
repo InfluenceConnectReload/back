@@ -19,6 +19,14 @@ public class CompanyMarketingChannel {
 		
 	}
 	
+	public CompanyMarketingChannel (MarketingChannel marketingChannel,
+			String link) 
+	{
+		super();
+        this.id.setMarketingChannel(marketingChannel);
+        this.link = link;
+	}
+	
 	public CompanyMarketingChannel(Company company, MarketingChannel marketingChannel, String link) {
 		super();
 		this.id.setCompany(company);
