@@ -21,6 +21,8 @@ import com.senac.influenceconnect.repositories.MarketingChannelRepository;
 import com.senac.influenceconnect.repositories.NicheRepository;
 import com.senac.influenceconnect.repositories.RoleRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class CompanyService {
 
@@ -52,6 +54,17 @@ public class CompanyService {
         }
 		
 		return companiesDTO;
+	}
+	
+	public CompanyDTO getCompanyById(Long id) {
+		try {			
+			Company c = companyRepo.getReferenceById(id);
+			return new CompanyDTO(c);
+		} catch (EntityNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
 	}
 	
 	public Company transformDTO_intoEntity(CompanyDTO cDTO) {
