@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,4 +63,14 @@ public class CompanyController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(count);
 	}
+	
+	@PutMapping(value="/{id}")
+	public ResponseEntity<CompanyDTO> updateCompany(
+			@PathVariable Long id,
+			@RequestBody CompanyDTO companyDTO)
+	{
+        CompanyDTO updatedCompanyDTO = companyServ.updateCompany(id, companyDTO);
+        
+        return ResponseEntity.status(HttpStatus.OK).body(updatedCompanyDTO);
+    }
 }

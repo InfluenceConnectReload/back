@@ -111,6 +111,31 @@ public class CompanyService {
 		return companyRepo.count();
 	}
 	
+	public CompanyDTO updateCompany(Long id, CompanyDTO companyDTO) {
+		Company c = companyRepo.getReferenceById(id);
+        c.setCnpj(companyDTO.getCnpj());
+        c.setProfileLogo(companyDTO.getProfileLogo());
+        c.getUser().setEmail(companyDTO.getEmail());
+        c.getUser().setName(companyDTO.getName());
+        c.getUser().setPassword(companyDTO.getPassword());
+        
+        Set<Niche> niches = new HashSet<Niche>();
+        for( long idNiche: companyDTO.getNicheIds()) {
+        	Niche niche = nicheRepo.getReferenceById(idNiche);
+            niches.add(niche);
+        }
+        c.setNiches(niches);
+        
+        c.getCompanyMarketingChannel().clear();
+        for(CompanyMarketingChannelDTO dto: companyDTO.getCompanyMarketingChannels()) {
+            MarketingChannel markChannel = markChannelRepo.getReferenceById(dto.getMarketingChannelId());
+            CompanyMarketingChannel compMarkChannel = new CompanyMarketingChannel(c, markChannel, dto.getLink());
+            c.getCompanyMarketingChannel().add(compMarkChannel);
+        }
+        
+        return new CompanyDTO(companyRepo.save(c));
+	}
+	
 	private Company transformDTO_intoEntity(CompanyDTO cDTO) {
 		Company c = new Company();
 		
