@@ -168,3 +168,83 @@ public class CompanyService {
 		return c;
 	}
 }
+
+/*#################CLASSE COMPANYSERVICE QUE EU, RAFAEL FIZ E QUE ERA TRABALHO MEU.###############################################*/
+
+
+/**
+ * Service class responsible for handling business logic related to Company entities.
+ * Classe de serviço responsável por lidar com a lógica de negócios relacionada a entidades de Empresa.
+ */
+
+/*
+
+package com.senac.influenceconnect.services;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+import com.senac.influenceconnect.dto.CompanyDTO;
+import com.senac.influenceconnect.models.Company;
+import com.senac.influenceconnect.repositories.CompanyRepository;
+
+@Service
+public class CompanyService {
+
+    private final CompanyRepository companyRepository;
+    private final ModelMapper modelMapper;
+
+    // Constructor injection to inject dependencies
+    //Construtor para injetar dependências
+    public CompanyService(CompanyRepository companyRepository, ModelMapper modelMapper) {
+        this.companyRepository = companyRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    // Method to find all companies
+    // Método para encontrar todas as empresas
+    public List<CompanyDTO> findAll() {
+        List<Company> companies = companyRepository.findAll();
+        return companies.stream()
+                .map(company -> modelMapper.map(company, CompanyDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    // Method to find a company by ID
+    // Método para encontrar uma empresa por ID
+    public CompanyDTO findById(Long id) {
+        Company company = companyRepository.findById(id).orElse(null);
+        return company != null ? modelMapper.map(company, CompanyDTO.class) : null;
+    }
+
+    // Method to save a new company
+    // Método para salvar uma nova empresa
+    public CompanyDTO save(CompanyDTO companyDTO) {
+        Company company = modelMapper.map(companyDTO, Company.class);
+        company = companyRepository.save(company);
+        return modelMapper.map(company, CompanyDTO.class);
+    }
+
+    // Method to update an existing company
+    // Método para atualizar uma empresa existente
+    public CompanyDTO update(Long id, CompanyDTO companyDTO) {
+        Company existingCompany = companyRepository.findById(id).orElse(null);
+        if (existingCompany != null) {
+            modelMapper.map(companyDTO, existingCompany);
+            existingCompany.setId(id);
+            existingCompany = companyRepository.save(existingCompany);
+            return modelMapper.map(existingCompany, CompanyDTO.class);
+        }
+        return null;
+    }
+
+    // Method to delete a company by ID
+    // Método para excluir uma empresa por ID
+    public void delete(Long id) {
+        companyRepository.deleteById(id);
+    }
+}
+
+
+ 
