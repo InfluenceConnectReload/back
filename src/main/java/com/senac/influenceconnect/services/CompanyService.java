@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.senac.influenceconnect.dto.CompanyDTO;
@@ -91,6 +93,18 @@ public class CompanyService {
 			
 			companyRepo.save(c);
 		}
+	}
+	
+	public List<CompanyDTO> getCompaniesPageable(int page, int pageSize) {
+		PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.by("id"));
+		List<Company> companies = companyRepo.findAll(pageRequest).getContent();
+		
+		List<CompanyDTO> companiesDTO = new ArrayList<CompanyDTO>();
+		for(Company c: companies) {
+			companiesDTO.add(new CompanyDTO(c));
+		}
+		
+		return companiesDTO;
 	}
 	
 	private Company transformDTO_intoEntity(CompanyDTO cDTO) {
