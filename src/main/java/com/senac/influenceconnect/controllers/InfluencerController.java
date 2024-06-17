@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
+import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.services.InfluencerService;
 
 @RestController
@@ -80,6 +82,15 @@ public class InfluencerController {
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(updatedInfluencerDTO);
+    }
+	
+	@PatchMapping(value="/status/{id}")
+	public ResponseEntity<InfluencerDTO> patchStatusInfluencer(@PathVariable Long id,
+            @RequestBody StatusType statusType)
+    {
+		InfluencerDTO updatedInfluencerDTO = influencerServ.updateStatus(id,statusType);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(updatedInfluencerDTO);
     }
 	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
 import com.senac.influenceconnect.dto.InfluencerSocialMediaDTO;
+import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
 import com.senac.influenceconnect.models.Niche;
@@ -125,6 +126,16 @@ public class InfluencerService {
 	    influenceRepo.save(inf);
 	    
 	    return new InfluencerDTO(inf);
+	}
+	
+	public InfluencerDTO updateStatus(Long id,StatusType statusType) {
+		Influencer inf = influenceRepo.getReferenceById(id);
+		
+		inf.setStatus(statusType);
+		
+        influenceRepo.save(inf);
+        
+        return new InfluencerDTO(inf);
 	}
 	
 	
