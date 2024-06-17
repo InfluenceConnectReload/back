@@ -5,11 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
 import com.senac.influenceconnect.models.Niche;
 
 public class InfluencerDTO {
+	
+	@JsonProperty(access = Access.READ_ONLY)
+	private Long id;
 	private String email;
     private String password;
     private String name;
@@ -24,10 +30,12 @@ public class InfluencerDTO {
     public InfluencerDTO() {
     }
     
-	public InfluencerDTO(String email, String password, String name, LocalDate birthdate, Influencer.StatusType status, String cpf,
+	public InfluencerDTO(Long id,String email, String password, String name, LocalDate birthdate, StatusType status, String cpf,
 			String profilePhoto, Long stateId, Set<Long> nicheIds,
 			Set<InfluencerSocialMediaDTO> influencerSocialMedia) {
+		
 		super();
+		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.name = name;
@@ -41,6 +49,7 @@ public class InfluencerDTO {
 	}
 	
 	public InfluencerDTO(Influencer inf) {
+		this.id = inf.getId();
 		 this.email = inf.getUser().getEmail();
 	        this.password = inf.getUser().getPassword();
 	        this.name = inf.getUser().getName();
@@ -61,6 +70,13 @@ public class InfluencerDTO {
 	        }
 	    }
 
+	public Long getId() {
+        return id;
+    }
+	
+	public void setId(Long id) {
+        this.id = id;
+    }
 
 	public String getEmail() {
 		return email;

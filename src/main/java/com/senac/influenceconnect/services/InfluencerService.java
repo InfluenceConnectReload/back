@@ -33,19 +33,14 @@ public class InfluencerService {
 	
 	@Autowired
 	private InfluencerRepository influenceRepo;
-	
 	@Autowired
     private StateRepository stateRepo;
-	
 	@Autowired
     private NicheRepository nicheRepo;
-	
 	@Autowired
     private SocialMediaRepository socialMediaRepo;	
-	
 	@Autowired
 	private UserRepository userRepo;
-	
 	@Autowired
 	private RoleRepository roleRepo;
 	
@@ -81,6 +76,36 @@ public class InfluencerService {
 	        // Log the exception or handle it appropriately
 	        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", e);
 	    }
+	}
+	
+	public InfluencerDTO updateInfluencer(long id, InfluencerDTO iDTO) {
+		Influencer inf = influenceRepo.getReferenceById(id);
+		
+		inf.getUser().setEmail(iDTO.getEmail());
+		inf.getUser().setName(iDTO.getName());
+		inf.getUser().setPassword(iDTO.getPassword());
+		inf.setBirthdate(iDTO.getBirthdate());
+		inf.setProfilePhoto(iDTO.getProfilePhoto());
+		inf.setCpf(iDTO.getCpf());
+		State state = stateRepo.getReferenceById(iDTO.getStateId());
+		inf.setState(state);
+		Set<Niche> infNiches = new HashSet<Niche>();
+		for (Long nicheId : iDTO.getNicheIds()) {
+            Niche niche = nicheRepo.getReferenceById(nicheId);
+            infNiches.add(niche);
+        }
+		inf.setNiches(infNiches);
+		
+		inf.getInfluencerSocialMedia().clear();
+	    for (InfluencerSocialMediaDTO socialMediaDTO : iDTO.getInfluencerSocialMedia()) {
+	        SocialMedia socialMedia = socialMediaRepo.getReferenceById(socialMediaDTO.getSocialMediaId());
+	        InfluencerSocialMedia influencerSocialMedia = new InfluencerSocialMedia(inf, socialMedia, socialMediaDTO.getLink());
+	        inf.getInfluencerSocialMedia().add(influencerSocialMedia);
+	    }
+	    
+	    influenceRepo.save(inf);
+	    
+	    return new InfluencerDTO(inf);
 	}
 	
 	

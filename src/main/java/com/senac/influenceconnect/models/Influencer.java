@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.senac.influenceconnect.enums.StatusType;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,11 +27,6 @@ import jakarta.persistence.Table;
 @Table(name="tb_influencers")
 public class Influencer {
 	
-	public static enum StatusType{
-		active,
-        inactive,
-        pending
-	}
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -44,10 +40,9 @@ public class Influencer {
 	private LocalDate birthdate;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusType status = StatusType.pending;
+	private StatusType status = StatusType.PENDING;
 	private String cpf;
 	
-	//PERGUNTAR SE É UM BOM JEITO DE GUARDAR IMAGENS
 	@Column(name = "profile_photo", columnDefinition = "TEXT")
 	private String profilePhoto;
 	

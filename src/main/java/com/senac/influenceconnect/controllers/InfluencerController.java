@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +47,19 @@ public class InfluencerController {
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(infDTO);
+    }
+	
+	@PutMapping(value="/{id}")
+	public ResponseEntity<InfluencerDTO> updateInfluencer(@PathVariable Long id,
+			@RequestBody InfluencerDTO iDTO)
+	{
+		InfluencerDTO updatedInfluencerDTO = influencerServ.updateInfluencer(id, iDTO);
+        
+        if(updatedInfluencerDTO == null){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+        
+        return ResponseEntity.status(HttpStatus.OK).body(updatedInfluencerDTO);
     }
 	
 }
