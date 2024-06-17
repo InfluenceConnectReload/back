@@ -107,6 +107,10 @@ public class CompanyService {
 		return companiesDTO;
 	}
 	
+	public Long countCompanies() {
+		return companyRepo.count();
+	}
+	
 	private Company transformDTO_intoEntity(CompanyDTO cDTO) {
 		Company c = new Company();
 		

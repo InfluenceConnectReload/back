@@ -55,4 +55,11 @@ public class CompanyController {
 		List<CompanyDTO> companies = companyServ.getCompaniesPageable(page, pageSize);
 		return ResponseEntity.status(HttpStatus.OK).body(companies);
     }
+	
+	@GetMapping(value="/count")
+    public ResponseEntity<Long> countCompanies(){
+		long count = companyServ.countCompanies();
+		
+		return ResponseEntity.status(HttpStatus.OK).body(count);
+	}
 }
