@@ -1,11 +1,10 @@
 package com.senac.influenceconnect.models.pk;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import com.senac.influenceconnect.models.Company;
-import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.MarketingChannel;
-import com.senac.influenceconnect.models.SocialMedia;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -37,6 +36,21 @@ public class CompanyMarketingChannelPK implements Serializable {
 	public void setMarketingChannel(MarketingChannel marketingChannel) {
 		this.marketingChannel = marketingChannel;
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(company, marketingChannel);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CompanyMarketingChannelPK other = (CompanyMarketingChannelPK) obj;
+		return Objects.equals(company, other.company) && Objects.equals(marketingChannel, other.marketingChannel);
+	}
 }

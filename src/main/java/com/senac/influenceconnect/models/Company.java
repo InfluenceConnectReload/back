@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.senac.influenceconnect.enums.StatusType;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -32,6 +33,8 @@ public class Company {
 	
 	@OneToMany(mappedBy="company")
 	private Set<Campaign> campaigns = new HashSet<>();
+	
+	private StatusType status = StatusType.ACTIVE;
 	
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL) //CERTIFICA DE CRIAR O USER QUANDO A COMPANY É CRIADA- DEVE DELETAR TAMBÉM
@@ -86,6 +89,14 @@ public class Company {
 	public void setProfileLogo(String profileLogo) {
 		this.profileLogo = profileLogo;
 	}
+	
+	public StatusType getStatus() {
+        return status;
+    }
+	
+	public void setStatus(StatusType status) {
+        this.status = status;
+    }
 
 	public User getUser() {
 		return user;

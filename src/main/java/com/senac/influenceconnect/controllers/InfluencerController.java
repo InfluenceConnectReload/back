@@ -23,7 +23,7 @@ public class InfluencerController {
 	@Autowired
 	private InfluencerService influencerServ;
 	
-	@PostMapping(value = "/register")
+	@PostMapping
 	public ResponseEntity<InfluencerDTO> registerInfluencer(@RequestBody InfluencerDTO iDTO) {
 		
         InfluencerDTO createdInfluencerDTO = influencerServ.registerInfluencer(iDTO);

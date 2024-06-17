@@ -1,6 +1,7 @@
 package com.senac.influenceconnect.models.pk;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.SocialMedia;
@@ -36,5 +37,19 @@ public class InfluencerSocialMediaPK implements Serializable {
 
 	public void setSocialMedia(SocialMedia socialMedia) {
 		this.socialMedia = socialMedia;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+	    if (this == o) return true;
+	    if (!(o instanceof InfluencerSocialMediaPK)) return false;
+	    InfluencerSocialMediaPK that = (InfluencerSocialMediaPK) o;
+	    return Objects.equals(getInfluencer(), that.getInfluencer()) &&
+	           Objects.equals(getSocialMedia(), that.getSocialMedia());
+	}
+
+	@Override
+	public int hashCode() {
+	    return Objects.hash(getInfluencer(), getSocialMedia());
 	}
 }
