@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -62,6 +64,23 @@ public class InfluencerService {
         }
         
         return allInfluencersDTO;
+	}
+	
+	public List<InfluencerDTO> getAllInfPageable(int page, int pageSize){
+		PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.by("id"));
+		
+		List<Influencer> allInfluencers = influenceRepo.findAll(pageRequest).getContent();
+		List<InfluencerDTO> returnInfluencers = new ArrayList<>();
+		
+		for( Influencer inf: allInfluencers) {
+			returnInfluencers.add(new InfluencerDTO(inf));
+		}
+		
+		return returnInfluencers;
+	}
+	
+	public long countInfluencers() {
+		return influenceRepo.count();
 	}
 	
 	public InfluencerDTO getInfluencerById(long id) {

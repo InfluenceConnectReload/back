@@ -3,6 +3,8 @@ package com.senac.influenceconnect.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
@@ -36,6 +39,23 @@ public class InfluencerController {
 		List<InfluencerDTO> allInfluencers = influencerServ.getAllInfluencers();
         
         return ResponseEntity.status(HttpStatus.OK).body(allInfluencers);
+	}
+	
+	@GetMapping(value= "/count")
+	public ResponseEntity<Long> countInfluencers(){
+        long count = influencerServ.countInfluencers();
+        
+        return ResponseEntity.status(HttpStatus.OK).body(count);
+    }
+	
+	@GetMapping(value="/pageable")
+    public ResponseEntity<List<InfluencerDTO>> getAllInfPageable(
+    		@RequestParam int page, @RequestParam int pageSize  )
+	{
+		
+		List<InfluencerDTO> allInfluencers = influencerServ.getAllInfPageable(page, pageSize);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(allInfluencers);
 	}
 	
 	@GetMapping(value="/{id}")
