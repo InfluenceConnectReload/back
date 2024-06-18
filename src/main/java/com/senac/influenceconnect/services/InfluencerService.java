@@ -1,5 +1,7 @@
 package com.senac.influenceconnect.services;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -138,6 +140,33 @@ public class InfluencerService {
         return new InfluencerDTO(inf);
 	}
 	
+	public void setDefaultsInfluencers() {
+		for(int i =0; i < 10; ++i) {
+			Role role = roleRepo.getReferenceById((long) 2);
+			String userName = "Influencer " + (i+1);
+			String userEmail = "influencer"+(i+1) + "@gmail.com";
+			String userPassword = "12345678Aa!";
+			User u = new User(role, userName, userEmail, userPassword);
+			State state = stateRepo.getReferenceById( (long)(i % 28)+1);
+			Set<Niche> niches = new HashSet<>();
+			for(int j = 0; j < 3; ++j) {
+                Niche niche = nicheRepo.getReferenceById( (long)(j+1));
+                niches.add(niche);
+            }
+			Set<InfluencerSocialMedia> infSC = new HashSet<>();
+			LocalDate birthDate = LocalDate.parse("02-26-1802", DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+	        String profilePhoto = "https://i.pinimg.com/280x280_RS/66/a1/a4/66a1a4a22e271ec3ee3ef35ba0883ca4.jpg";
+			Influencer inf = new Influencer(u, birthDate,StatusType.PENDING , "446.072.237-27",
+					profilePhoto,state, niches, infSC );
+			for(int j = 0; j < 3; ++j) {
+				SocialMedia socialMedia = socialMediaRepo.getReferenceById( (long)(j+1));
+                InfluencerSocialMedia infSCa = new InfluencerSocialMedia(inf, socialMedia, "https://www.google.com");
+                inf.getInfluencerSocialMedia().add(infSCa);
+			}
+			
+            influenceRepo.save(inf);
+		}
+	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
 		//CRIAR UM USER

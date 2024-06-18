@@ -83,8 +83,8 @@ public class CompanyService {
 			Set<CompanyMarketingChannel> marketList = new HashSet<>();
 			
 			Company c = new Company(null, "38.477.102/0001-75",
-                    "https://freesvg.org/img/logo-generic.png", user,
-                    nichesList, null);
+                    "https://w7.pngwing.com/pngs/591/502/png-transparent-logo-generic-drug-bank-bank-globe-service-payment.png",
+                    user,nichesList, null);
 			marketList.add(new CompanyMarketingChannel(c,
 					markChannelRepo.getReferenceById((long)1),
 					"www.facebook.com"
