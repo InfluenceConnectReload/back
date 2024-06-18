@@ -141,7 +141,7 @@ public class InfluencerService {
 	}
 	
 	public void setDefaultsInfluencers() {
-		for(int i =0; i < 10; ++i) {
+		for(int i =0; i < 30; ++i) {
 			Role role = roleRepo.getReferenceById((long) 2);
 			String userName = "Influencer " + (i+1);
 			String userEmail = "influencer"+(i+1) + "@gmail.com";
@@ -155,13 +155,19 @@ public class InfluencerService {
             }
 			Set<InfluencerSocialMedia> infSC = new HashSet<>();
 			LocalDate birthDate = LocalDate.parse("02-26-1802", DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-	        String profilePhoto = "https://i.pinimg.com/280x280_RS/66/a1/a4/66a1a4a22e271ec3ee3ef35ba0883ca4.jpg";
+	        String profilePhoto = "https://avatars.githubusercontent.com/u/153961814?v=4";
 			Influencer inf = new Influencer(u, birthDate,StatusType.PENDING , "446.072.237-27",
 					profilePhoto,state, niches, infSC );
 			for(int j = 0; j < 3; ++j) {
 				SocialMedia socialMedia = socialMediaRepo.getReferenceById( (long)(j+1));
                 InfluencerSocialMedia infSCa = new InfluencerSocialMedia(inf, socialMedia, "https://www.google.com");
                 inf.getInfluencerSocialMedia().add(infSCa);
+			}
+			
+			if( i % 3 == 0 ) {
+				inf.setStatus(StatusType.ACTIVE);
+			} if( i % 3 == 1 ) {
+				inf.setStatus(StatusType.INACTIVE);
 			}
 			
             influenceRepo.save(inf);
