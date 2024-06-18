@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
+import com.senac.influenceconnect.dto.StatusTypeDTO;
 import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.services.InfluencerService;
 
@@ -84,9 +85,9 @@ public class InfluencerController {
 	
 	@PatchMapping(value="/status/{id}")
 	public ResponseEntity<InfluencerDTO> patchStatusInfluencer(@PathVariable Long id,
-            @RequestBody StatusType statusType)
+            @RequestBody StatusTypeDTO statusDTO)
     {
-		InfluencerDTO updatedInfluencerDTO = influencerServ.updateStatus(id,statusType);
+		InfluencerDTO updatedInfluencerDTO = influencerServ.updateStatus(id,statusDTO.getStatusType());
 		
 		return ResponseEntity.status(HttpStatus.OK).body(updatedInfluencerDTO);
     }
