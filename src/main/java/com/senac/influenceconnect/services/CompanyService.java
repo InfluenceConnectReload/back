@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.senac.influenceconnect.dto.CompanyDTO;
 import com.senac.influenceconnect.dto.CompanyMarketingChannelDTO;
+import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.models.Company;
 import com.senac.influenceconnect.models.CompanyMarketingChannel;
 import com.senac.influenceconnect.models.MarketingChannel;
@@ -148,7 +149,7 @@ public class CompanyService {
 		c.setCnpj(cDTO.getCnpj());
 		c.setProfileLogo(cDTO.getProfileLogo());
 		c.setUser(user);
-		
+		c.setStatus(StatusType.ACTIVE);
 		Set<Niche> listNiche = new HashSet<Niche>();
 		for (Long id : cDTO.getNicheIds()) {
             Niche niche = nicheRepo.getReferenceById(id);

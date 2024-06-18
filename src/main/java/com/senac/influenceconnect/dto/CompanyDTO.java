@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.models.Company;
 
 public class CompanyDTO {
@@ -15,6 +16,8 @@ public class CompanyDTO {
     private String profileLogo;
     private String name;
     private String email;
+	@JsonProperty(access = Access.READ_ONLY)
+    private StatusType status;
     @JsonProperty(access= Access.WRITE_ONLY)
     private String password;
     private Set<Long> nicheIds;
@@ -24,12 +27,13 @@ public class CompanyDTO {
         
     }
     
-	public CompanyDTO(Long id, String cnpj, String profileLogo, String name, String email, String password,
+	public CompanyDTO(Long id, String cnpj, String profileLogo, String name,StatusType status, String email, String password,
 			Set<Long> nicheIds, Set<CompanyMarketingChannelDTO> companyMarketingChannels) {
 		super();
 		this.id = id;
 		this.cnpj = cnpj;
 		this.profileLogo = profileLogo;
+		this.status = status;
 		this.name = name;
 		this.email = email;
 		this.password = password;

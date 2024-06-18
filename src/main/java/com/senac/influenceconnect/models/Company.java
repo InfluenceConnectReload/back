@@ -9,6 +9,8 @@ import com.senac.influenceconnect.enums.StatusType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,6 +36,7 @@ public class Company {
 	@OneToMany(mappedBy="company")
 	private Set<Campaign> campaigns = new HashSet<>();
 	
+	@Enumerated(EnumType.STRING)
 	private StatusType status = StatusType.ACTIVE;
 	
 	@JsonIgnore
@@ -61,6 +64,7 @@ public class Company {
 		this.id = id;
 		this.cnpj = cnpj;
 		this.profileLogo = profileLogo;
+		this.status = StatusType.ACTIVE;
 		this.user = user;
 		this.niches = niches;
 		this.companyMarketingChannel = companyMarketingChannel;
