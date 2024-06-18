@@ -1,9 +1,13 @@
 package com.senac.influenceconnect.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.senac.influenceconnect.dto.CampaignDTO;
@@ -34,6 +38,29 @@ public class CampaignService {
 	public CampaignDTO createCampaign(CampaignDTO campaignDTO) {
 		Campaign c = campaignRepo.save(copyIntoEntity(campaignDTO));
 		return new CampaignDTO(c);
+	}
+	
+	public List<CampaignDTO> getAllCampaigns() {
+		List<Campaign> allCampaigns = campaignRepo.findAll();
+        List<CampaignDTO> allCampaignsDTO = new ArrayList<>();
+        
+        for (Campaign c : allCampaigns) {
+            allCampaignsDTO.add(new CampaignDTO(c));
+        }
+        
+        return allCampaignsDTO;
+	}
+	
+	public List<CampaignDTO> getPageableCampaigns(int page, int pageSize) {
+		PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.by("id"));
+		List<Campaign> listC = campaignRepo.findAll(pageRequest).getContent();
+		
+		List<CampaignDTO> allCampaigns = new ArrayList<>();
+		for( Campaign c: listC ) {
+			allCampaigns.add(new CampaignDTO(c));
+		}
+		
+		return allCampaigns;		
 	}
 	
 	private Campaign copyIntoEntity(CampaignDTO dto) {
