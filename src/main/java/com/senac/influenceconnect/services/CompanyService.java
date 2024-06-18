@@ -90,8 +90,7 @@ public class CompanyService {
 					"www.facebook.com"
 					));
 			c.setCompanyMarketingChannel(marketList);
-			
-			
+			c.setStatus(StatusType.ACTIVE);
 			companyRepo.save(c);
 		}
 	}

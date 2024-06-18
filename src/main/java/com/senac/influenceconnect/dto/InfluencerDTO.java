@@ -20,6 +20,7 @@ public class InfluencerDTO {
     private String password;
     private String name;
     private LocalDate birthdate;
+    @JsonProperty(access = Access.READ_ONLY)
     private String status;
     private String cpf;
     private String profilePhoto;

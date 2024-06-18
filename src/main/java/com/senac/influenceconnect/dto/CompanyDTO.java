@@ -17,7 +17,7 @@ public class CompanyDTO {
     private String name;
     private String email;
 	@JsonProperty(access = Access.READ_ONLY)
-    private StatusType status;
+    private StatusType status = StatusType.ACTIVE;
     @JsonProperty(access= Access.WRITE_ONLY)
     private String password;
     private Set<Long> nicheIds;
