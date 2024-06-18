@@ -167,6 +167,10 @@ public class CompanyService {
 		
 		return c;
 	}
+	
+	public void deleteCompany(Long id) {
+        companyRepo.deleteById(id);
+    }
 }
 
 /*#################CLASSE COMPANYSERVICE QUE EU, RAFAEL FIZ E QUE ERA TRABALHO MEU.###############################################*/
