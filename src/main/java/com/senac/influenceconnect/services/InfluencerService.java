@@ -62,7 +62,6 @@ public class InfluencerService {
         List<InfluencerDTO> allInfluencersDTO = new ArrayList<>();
         
         for (Influencer inf : allInfluencers) {
-        	inf.getUser().setPassword(null);
             allInfluencersDTO.add(new InfluencerDTO(inf));
         }
         

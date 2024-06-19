@@ -78,6 +78,21 @@ public class Influencer {
 		this.niches = niches;
 		this.influencerSocialMedia = influencerSocialMedia;
 	}
+	
+	public Influencer(Long id, User user, LocalDate birthdate, StatusType status, String cpf, String profilePhoto,
+			Set<Campaign> campaigns, State state, Set<Niche> niches, Set<InfluencerSocialMedia> influencerSocialMedia) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.birthdate = birthdate;
+		this.status = status;
+		this.cpf = cpf;
+		this.profilePhoto = profilePhoto;
+		this.campaigns = campaigns;
+		this.state = state;
+		this.niches = niches;
+		this.influencerSocialMedia = influencerSocialMedia;
+	}
 
 	public Long getId() {
 		return id;
@@ -149,6 +164,14 @@ public class Influencer {
 
 	public void setInfluencerSocialMedia(Set<InfluencerSocialMedia> influencerSocialMedia) {
 		this.influencerSocialMedia = influencerSocialMedia;
+	}
+
+	public Set<Campaign> getCampaigns() {
+		return campaigns;
+	}
+
+	public void setCampaigns(Set<Campaign> campaigns) {
+		this.campaigns = campaigns;
 	}
 	
 	
