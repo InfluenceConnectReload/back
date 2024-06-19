@@ -63,6 +63,14 @@ public class CampaignService {
 		return allCampaigns;		
 	}
 	
+	public CampaignDTO addInfluencerToCampaign(long idCampaign,long infId) {
+		Campaign camp = campaignRepo.getReferenceById((long) idCampaign);
+		Influencer inf = infRepo.getReferenceById((long) infId);
+		camp.getInfluencers().add(inf);
+		
+		return new CampaignDTO(campaignRepo.save(camp));	
+	}
+	
 	private Campaign copyIntoEntity(CampaignDTO dto) {
 		Campaign c = new Campaign();
 		
