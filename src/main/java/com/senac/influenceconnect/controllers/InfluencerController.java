@@ -92,4 +92,11 @@ public class InfluencerController {
 		return ResponseEntity.status(HttpStatus.OK).body(updatedInfluencerDTO);
     }
 	
+	@GetMapping("/active")
+	public ResponseEntity<List<InfluencerDTO>> getAllActiveInfluencers(){
+		List<InfluencerDTO> allInfluencers = influencerServ.getAllActiveInfluencers();
+        
+        return ResponseEntity.status(HttpStatus.OK).body(allInfluencers);
+	}
+	
 }

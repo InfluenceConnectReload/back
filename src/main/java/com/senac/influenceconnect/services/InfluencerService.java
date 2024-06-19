@@ -130,7 +130,7 @@ public class InfluencerService {
 	    return new InfluencerDTO(inf);
 	}
 	
-	public InfluencerDTO updateStatus(Long id,StatusType statusType) {
+	public InfluencerDTO updateStatus(Long id, StatusType statusType) {
 		Influencer inf = influenceRepo.getReferenceById(id);
 		
 		inf.setStatus(statusType);
@@ -172,6 +172,17 @@ public class InfluencerService {
 			
             influenceRepo.save(inf);
 		}
+	}
+	
+	public List<InfluencerDTO> getAllActiveInfluencers(){
+		List<InfluencerDTO> activeInfluencers = new ArrayList<>();
+		List<Influencer> infList = influenceRepo.findAllActives();
+		
+		for(Influencer inf: infList) {
+			activeInfluencers.add(new InfluencerDTO(inf));
+		}
+		
+		return activeInfluencers;
 	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
