@@ -48,7 +48,7 @@ public class CampaignController {
         return ResponseEntity.status(200).body(allCampaigns);
 	}
 	
-	@PatchMapping(value="/addInfluencer/{idCampaign}/{idInfluencer}")
+	@PatchMapping(value="/addInfluencer")
 	public ResponseEntity<CampaignDTO> addInfluencerToCampaign
 	(@RequestParam long idCampaign, @RequestParam long influencerId)
 	{
