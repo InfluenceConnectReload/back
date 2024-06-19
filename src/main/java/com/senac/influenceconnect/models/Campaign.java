@@ -49,6 +49,7 @@ public class Campaign {
     @JoinColumn(name = "company_id")
     private Company company;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="tb_campaigns_influencers",
             joinColumns=@JoinColumn(name="campaign_id"),
