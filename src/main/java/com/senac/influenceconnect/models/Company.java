@@ -51,6 +51,7 @@ public class Company {
 			inverseJoinColumns = @JoinColumn(name="niche_id"))
 	private Set<Niche> niches = new HashSet<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.company", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<CompanyMarketingChannel> companyMarketingChannel = new HashSet<>();
 

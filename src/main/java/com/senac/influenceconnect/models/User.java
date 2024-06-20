@@ -89,6 +89,14 @@ public class User {
 	public void setInfluencer(Influencer influencer) {
 		this.influencer = influencer;
 	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 	
 	
 }
