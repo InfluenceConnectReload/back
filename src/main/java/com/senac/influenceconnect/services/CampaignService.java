@@ -52,16 +52,9 @@ public class CampaignService {
         return allCampaignsDTO;
 	}
 	
-//	public List<CampaignDTO> getPageableCampaigns(int page, int pageSize) {
 	public Page<Campaign> getPageableCampaigns(int page, int pageSize) {
 		PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.by("id"));
 		Page<Campaign> pages = campaignRepo.findAll(pageRequest);
-//		List<Campaign> listC =  pages.getContent();
-
-//		List<CampaignDTO> allCampaigns = new ArrayList<>();
-//		for( Campaign c: listC ) {
-//			allCampaigns.add(new CampaignDTO(c));
-//		}
 		
 		return pages;		
 	}
@@ -85,6 +78,8 @@ public class CampaignService {
 		c.setExpecLikes(dto.getExpecLikes());
 		c.setExpecComments(dto.getExpecComments());
 		c.setExpecSaves(dto.getExpecSaves());
+		c.setStatus(dto.getStatus());
+		c.setLogo(dto.getLogo());
 
 		Niche campNiche = nicheRepo.getReferenceById(dto.getNicheId());
 		c.setNiche(campNiche);

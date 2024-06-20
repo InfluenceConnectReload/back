@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.senac.influenceconnect.enums.CampaignStatus;
 import com.senac.influenceconnect.models.Campaign;
 import com.senac.influenceconnect.models.MarketingChannel;
 
@@ -21,6 +22,8 @@ public class CampaignDTO {
     private int expecLikes;
     private int expecComments;
     private int expecSaves;
+    private CampaignStatus status;
+    private String logo;
 
     private Long nicheId; //CAMPANHA É SÓ UM NICHO
     private Set<Long> marketingChannelIds;
@@ -45,6 +48,8 @@ public class CampaignDTO {
     	this.marketingChannelIds = c.getMarketingChannels().stream().map(ce -> ce.getId()).collect(Collectors.toSet());
     	this.companyId = c.getCompany().getId();
     	this.influencerIds = c.getInfluencers().stream().map(i -> i.getId()).collect(Collectors.toSet());
+    	this.status = c.getStatus();
+    	this.logo = c.getLogo();
     }	
     
 	public CampaignDTO(Long id, String name, String description, LocalDate startDate, LocalDate endDate, double budget,
@@ -168,5 +173,21 @@ public class CampaignDTO {
 
 	public void setInfluencerIds(Set<Long> influencerIds) {
 		this.influencerIds = influencerIds;
+	}
+
+	public CampaignStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CampaignStatus status) {
+		this.status = status;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 }

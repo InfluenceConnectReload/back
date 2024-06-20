@@ -5,8 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.senac.influenceconnect.enums.CampaignStatus;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,9 +32,14 @@ public class Campaign {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private double budget;
+	@Column(name = "logo", columnDefinition = "TEXT")
+	private String logo;
 	private int expecLikes;
 	private int expecComments;
 	private int expecSaves;
+	
+	@Enumerated(EnumType.STRING)
+	private CampaignStatus status;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -127,6 +136,14 @@ public class Campaign {
 		this.budget = budget;
 	}
 
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
 	public int getExpecLikes() {
 		return expecLikes;
 	}
@@ -149,6 +166,14 @@ public class Campaign {
 
 	public void setExpecSaves(int expecSaves) {
 		this.expecSaves = expecSaves;
+	}
+	
+	public CampaignStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CampaignStatus status) {
+		this.status = status;
 	}
 
 	public Niche getNiche() {
