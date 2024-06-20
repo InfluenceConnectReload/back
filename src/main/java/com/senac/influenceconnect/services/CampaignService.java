@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -51,16 +52,18 @@ public class CampaignService {
         return allCampaignsDTO;
 	}
 	
-	public List<CampaignDTO> getPageableCampaigns(int page, int pageSize) {
+//	public List<CampaignDTO> getPageableCampaigns(int page, int pageSize) {
+	public Page<Campaign> getPageableCampaigns(int page, int pageSize) {
 		PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.by("id"));
-		List<Campaign> listC = campaignRepo.findAll(pageRequest).getContent();
+		Page<Campaign> pages = campaignRepo.findAll(pageRequest);
+//		List<Campaign> listC =  pages.getContent();
+
+//		List<CampaignDTO> allCampaigns = new ArrayList<>();
+//		for( Campaign c: listC ) {
+//			allCampaigns.add(new CampaignDTO(c));
+//		}
 		
-		List<CampaignDTO> allCampaigns = new ArrayList<>();
-		for( Campaign c: listC ) {
-			allCampaigns.add(new CampaignDTO(c));
-		}
-		
-		return allCampaigns;		
+		return pages;		
 	}
 	
 	public CampaignDTO addInfluencerToCampaign(long idCampaign,long infId) {

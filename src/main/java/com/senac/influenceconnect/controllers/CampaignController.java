@@ -3,6 +3,7 @@ package com.senac.influenceconnect.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.dto.CampaignDTO;
-import com.senac.influenceconnect.dto.InfluencerDTO;
+import com.senac.influenceconnect.models.Campaign;
 import com.senac.influenceconnect.services.CampaignService;
 
 @RestController
@@ -40,10 +41,10 @@ public class CampaignController {
 	}
 	
 	@GetMapping(value="/pageable")
-	public ResponseEntity<List<CampaignDTO>> getPageableCampaigns
+	public ResponseEntity<Page<Campaign>> getPageableCampaigns
 	(@RequestParam int page, @RequestParam int pageSize)
 	{
-		List<CampaignDTO> allCampaigns = campaignServ.getPageableCampaigns(page, pageSize);
+		Page<Campaign> allCampaigns = campaignServ.getPageableCampaigns(page, pageSize);
         
         return ResponseEntity.status(200).body(allCampaigns);
 	}

@@ -50,6 +50,9 @@ public class Influencer {
 	@JoinColumn(name="state_id")
 	private State state;
 	
+	@ManyToMany(mappedBy="influencers")
+	private Set<Campaign> campaigns = new HashSet<>();
+	
 	//JsonIgnore previne uma recursividade na hora de passar o json para o FRONTEND
 	@JsonIgnore 
 	@ManyToMany
@@ -85,7 +88,6 @@ public class Influencer {
 		this.status = status;
 		this.cpf = cpf;
 		this.profilePhoto = profilePhoto;
-		this.campaigns = campaigns;
 		this.state = state;
 		this.niches = niches;
 		this.influencerSocialMedia = influencerSocialMedia;
@@ -163,6 +165,11 @@ public class Influencer {
 		this.influencerSocialMedia = influencerSocialMedia;
 	}
 
-=======
->>>>>>> jdk17-query
+	public Set<Campaign> getCampaigns() {
+		return campaigns;
+	}
+
+	public void setCampaigns(Set<Campaign> campaigns) {
+		this.campaigns = campaigns;
+	}
 }

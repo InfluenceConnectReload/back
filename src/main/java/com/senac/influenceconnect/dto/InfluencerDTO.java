@@ -56,10 +56,10 @@ public class InfluencerDTO {
 	        
 	        // Inicializa a lista de influencerCampaigns
 	        this.influencerCampaigns = new HashSet<>();
+	        for(Campaign campaign : inf.getCampaigns()) {
+	        	this.influencerCampaigns.add(new CampaignDTO(campaign));
+	        }
             // Preenche a lista de influencerCampaigns com os DTOs correspondentes
-            for (Campaign campaign : inf.getCampaigns()) {
-                this.influencerCampaigns.add(new CampaignDTO(campaign));
-            }
 	    }
 
 	public Long getId() {

@@ -24,6 +24,7 @@ import com.senac.influenceconnect.models.Role;
 import com.senac.influenceconnect.models.SocialMedia;
 import com.senac.influenceconnect.models.State;
 import com.senac.influenceconnect.models.User;
+import com.senac.influenceconnect.repositories.CampaignRepository;
 import com.senac.influenceconnect.repositories.InfluencerRepository;
 import com.senac.influenceconnect.repositories.NicheRepository;
 import com.senac.influenceconnect.repositories.RoleRepository;
@@ -48,6 +49,8 @@ public class InfluencerService {
 	private UserRepository userRepo;
 	@Autowired
 	private RoleRepository roleRepo;
+	@Autowired
+	private CampaignRepository campaignRepo;
 	
 	public InfluencerDTO registerInfluencer(InfluencerDTO iDTO) {
 		Influencer inf = new Influencer();
@@ -133,6 +136,7 @@ public class InfluencerService {
 		Influencer inf = influenceRepo.getReferenceById(id);
 		
 		inf.setStatus(statusType);
+		campaignRepo.deleteInfluencerFromCampaigns(inf.getId());
 		
         influenceRepo.save(inf);
         
