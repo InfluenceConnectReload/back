@@ -1,6 +1,5 @@
 package com.senac.influenceconnect.services;
 
-import java.sql.SQLDataException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,7 +9,9 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -196,6 +197,12 @@ public class InfluencerService {
 		}
 		
 		return activeInfluencers;
+	}
+	
+	public Page<InfluencerDTO> getPageableInfluencersByTerm(String term, int page, int pageSize ){
+		Pageable pageable = PageRequest.of(page, pageSize);
+		Page<Influencer> infs =influenceRepo.findByNameContainingIgnoreCase(term, pageable); 
+		return infs.map(InfluencerDTO::new); 
 	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
