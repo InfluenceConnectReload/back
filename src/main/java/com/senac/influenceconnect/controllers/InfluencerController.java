@@ -72,11 +72,10 @@ public class InfluencerController {
     }
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<InfluencerDTO> updateInfluencer(@PathVariable int id,
+	public ResponseEntity<InfluencerDTO> updateInfluencer(@PathVariable Long id,
 			@RequestBody UpdateInfluencerDTO iDTO)
 	{
-		System.out.println("Esse é o id: "+ id);
-		InfluencerDTO updatedInfluencerDTO = influencerServ.updateInfluencer((long)id, iDTO);
+		InfluencerDTO updatedInfluencerDTO = influencerServ.updateInfluencer(id, iDTO);
         
         if(updatedInfluencerDTO == null){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

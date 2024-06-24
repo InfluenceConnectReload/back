@@ -123,8 +123,7 @@ public class InfluencerService {
 		inf.setNiches(infNiches);
 		
 		inf.getInfluencerSocialMedia().clear();
-		System.out.println("REDES SOCIAIS");
-		System.out.println(iDTO.getInfluencerSocialMedia());
+		System.out.println("REDES SOCIAIS");	
 	    for (InfluencerSocialMediaDTO socialMediaDTO : iDTO.getInfluencerSocialMedia()) {
 	        SocialMedia socialMedia = socialMediaRepo.getReferenceById(socialMediaDTO.getSocialMediaId());
 	        InfluencerSocialMedia influencerSocialMedia = new InfluencerSocialMedia(inf, socialMedia, socialMediaDTO.getLink());
