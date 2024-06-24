@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
 import com.senac.influenceconnect.dto.StatusTypeDTO;
+import com.senac.influenceconnect.dto.UpdateInfluencerDTO;
 import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.services.InfluencerService;
 
@@ -71,10 +72,11 @@ public class InfluencerController {
     }
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<InfluencerDTO> updateInfluencer(@PathVariable Long id,
-			@RequestBody InfluencerDTO iDTO)
+	public ResponseEntity<InfluencerDTO> updateInfluencer(@PathVariable int id,
+			@RequestBody UpdateInfluencerDTO iDTO)
 	{
-		InfluencerDTO updatedInfluencerDTO = influencerServ.updateInfluencer(id, iDTO);
+		System.out.println("Esse é o id: "+ id);
+		InfluencerDTO updatedInfluencerDTO = influencerServ.updateInfluencer((long)id, iDTO);
         
         if(updatedInfluencerDTO == null){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

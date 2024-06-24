@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
 import com.senac.influenceconnect.dto.InfluencerSocialMediaDTO;
+import com.senac.influenceconnect.dto.UpdateInfluencerDTO;
 import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
@@ -104,12 +105,11 @@ public class InfluencerService {
 	    }
 	}
 	
-	public InfluencerDTO updateInfluencer(long id, InfluencerDTO iDTO) {
+	public InfluencerDTO updateInfluencer(long id, UpdateInfluencerDTO iDTO) {
 		Influencer inf = influenceRepo.getReferenceById(id);
-		
+		inf.setId(id);
 		inf.getUser().setEmail(iDTO.getEmail());
 		inf.getUser().setName(iDTO.getName());
-		inf.getUser().setPassword(iDTO.getPassword());
 		inf.setBirthdate(iDTO.getBirthdate());
 		inf.setProfilePhoto(iDTO.getProfilePhoto());
 		inf.setCpf(iDTO.getCpf());
@@ -123,6 +123,8 @@ public class InfluencerService {
 		inf.setNiches(infNiches);
 		
 		inf.getInfluencerSocialMedia().clear();
+		System.out.println("REDES SOCIAIS");
+		System.out.println(iDTO.getInfluencerSocialMedia());
 	    for (InfluencerSocialMediaDTO socialMediaDTO : iDTO.getInfluencerSocialMedia()) {
 	        SocialMedia socialMedia = socialMediaRepo.getReferenceById(socialMediaDTO.getSocialMediaId());
 	        InfluencerSocialMedia influencerSocialMedia = new InfluencerSocialMedia(inf, socialMedia, socialMediaDTO.getLink());
