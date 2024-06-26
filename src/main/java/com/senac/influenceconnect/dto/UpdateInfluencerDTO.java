@@ -13,13 +13,11 @@ import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
 import com.senac.influenceconnect.models.Niche;
 
-public class InfluencerDTO {
+public class UpdateInfluencerDTO {
 	
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	private String email;
-	@JsonProperty(access = Access.WRITE_ONLY)
-    private String password;
     private String name;
     private LocalDate birthdate;
     @JsonProperty(access = Access.READ_ONLY)
@@ -32,35 +30,34 @@ public class InfluencerDTO {
     @JsonProperty(access = Access.READ_ONLY)
     private Set<CampaignDTO> influencerCampaigns;
     
-    public InfluencerDTO() {
+    public UpdateInfluencerDTO() {
     }
 	
-	public InfluencerDTO(Influencer inf) {
+	public UpdateInfluencerDTO(Influencer inf) {
 		this.id = inf.getId();
-		 this.email = inf.getUser().getEmail();
-	        this.password = inf.getUser().getPassword();
-	        this.name = inf.getUser().getName();
-	        this.birthdate = inf.getBirthdate();
-	        this.status = inf.getStatus().toString();
-	        this.cpf = inf.getCpf();
-	        this.profilePhoto = inf.getProfilePhoto();
-	        this.stateId = inf.getState().getId();
-	        this.nicheIds = inf.getNiches().stream()
-	                            .map(Niche::getId)
-	                            .collect(Collectors.toSet());
-	        
-	        // Inicializa a lista de influencerSocialMedia
-	        this.influencerSocialMedia = new HashSet<>();
-	        for (InfluencerSocialMedia media : inf.getInfluencerSocialMedia()) {
-	            this.influencerSocialMedia.add(new InfluencerSocialMediaDTO(media));
-	        }
-	        
-	        // Inicializa a lista de influencerCampaigns
-	        this.influencerCampaigns = new HashSet<>();
-	        for(Campaign campaign : inf.getCampaigns()) {
-	        	this.influencerCampaigns.add(new CampaignDTO(campaign));
-	        }
-            // Preenche a lista de influencerCampaigns com os DTOs correspondentes
+		this.email = inf.getUser().getEmail();
+        this.name = inf.getUser().getName();
+        this.birthdate = inf.getBirthdate();
+        this.status = inf.getStatus().toString();
+        this.cpf = inf.getCpf();
+        this.profilePhoto = inf.getProfilePhoto();
+        this.stateId = inf.getState().getId();
+        this.nicheIds = inf.getNiches().stream()
+                            .map(Niche::getId)
+                            .collect(Collectors.toSet());
+        
+        // Inicializa a lista de influencerSocialMedia
+        this.influencerSocialMedia = new HashSet<>();
+        for (InfluencerSocialMedia media : inf.getInfluencerSocialMedia()) {
+            this.influencerSocialMedia.add(new InfluencerSocialMediaDTO(media));
+        }
+        
+        // Inicializa a lista de influencerCampaigns
+        this.influencerCampaigns = new HashSet<>();
+        for(Campaign campaign : inf.getCampaigns()) {
+        	this.influencerCampaigns.add(new CampaignDTO(campaign));
+        }
+        // Preenche a lista de influencerCampaigns com os DTOs correspondentes
 	    }
 
 	public Long getId() {
@@ -77,14 +74,6 @@ public class InfluencerDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getName() {

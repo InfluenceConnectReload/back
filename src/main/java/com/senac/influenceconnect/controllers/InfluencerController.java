@@ -3,6 +3,7 @@ package com.senac.influenceconnect.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
 import com.senac.influenceconnect.dto.StatusTypeDTO;
-import com.senac.influenceconnect.enums.StatusType;
+import com.senac.influenceconnect.dto.UpdateInfluencerDTO;
+import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.services.InfluencerService;
 
 @RestController
@@ -72,7 +74,7 @@ public class InfluencerController {
 	
 	@PutMapping(value="/{id}")
 	public ResponseEntity<InfluencerDTO> updateInfluencer(@PathVariable Long id,
-			@RequestBody InfluencerDTO iDTO)
+			@RequestBody UpdateInfluencerDTO iDTO)
 	{
 		InfluencerDTO updatedInfluencerDTO = influencerServ.updateInfluencer(id, iDTO);
         
@@ -98,5 +100,15 @@ public class InfluencerController {
         
         return ResponseEntity.status(HttpStatus.OK).body(allInfluencers);
 	}
+	
+	@GetMapping("/pageable/{term}")
+	public ResponseEntity<Page<InfluencerDTO>> getPageableInfluencersByTerm
+	(@PathVariable String term,@RequestParam int page, @RequestParam int pageSize )
+    {
+		Page<InfluencerDTO> p = influencerServ.getPageableInfluencersByTerm(term, page, pageSize);
+		System.out.println("TERMO: " + term);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(p);
+    }
 	
 }

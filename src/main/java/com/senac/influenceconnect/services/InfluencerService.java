@@ -1,6 +1,5 @@
 package com.senac.influenceconnect.services;
 
-import java.sql.SQLDataException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,7 +9,9 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.senac.influenceconnect.dto.InfluencerDTO;
 import com.senac.influenceconnect.dto.InfluencerSocialMediaDTO;
+import com.senac.influenceconnect.dto.UpdateInfluencerDTO;
 import com.senac.influenceconnect.enums.StatusType;
 import com.senac.influenceconnect.models.Influencer;
 import com.senac.influenceconnect.models.InfluencerSocialMedia;
@@ -104,12 +106,11 @@ public class InfluencerService {
 	    }
 	}
 	
-	public InfluencerDTO updateInfluencer(long id, InfluencerDTO iDTO) {
+	public InfluencerDTO updateInfluencer(long id, UpdateInfluencerDTO iDTO) {
 		Influencer inf = influenceRepo.getReferenceById(id);
-		
+		inf.setId(id);
 		inf.getUser().setEmail(iDTO.getEmail());
 		inf.getUser().setName(iDTO.getName());
-		inf.getUser().setPassword(iDTO.getPassword());
 		inf.setBirthdate(iDTO.getBirthdate());
 		inf.setProfilePhoto(iDTO.getProfilePhoto());
 		inf.setCpf(iDTO.getCpf());
@@ -123,6 +124,7 @@ public class InfluencerService {
 		inf.setNiches(infNiches);
 		
 		inf.getInfluencerSocialMedia().clear();
+		System.out.println("REDES SOCIAIS");	
 	    for (InfluencerSocialMediaDTO socialMediaDTO : iDTO.getInfluencerSocialMedia()) {
 	        SocialMedia socialMedia = socialMediaRepo.getReferenceById(socialMediaDTO.getSocialMediaId());
 	        InfluencerSocialMedia influencerSocialMedia = new InfluencerSocialMedia(inf, socialMedia, socialMediaDTO.getLink());
@@ -195,6 +197,12 @@ public class InfluencerService {
 		}
 		
 		return activeInfluencers;
+	}
+	
+	public Page<InfluencerDTO> getPageableInfluencersByTerm(String term, int page, int pageSize ){
+		Pageable pageable = PageRequest.of(page, pageSize);
+		Page<Influencer> infs =influenceRepo.findByNameContainingIgnoreCase(term, pageable); 
+		return infs.map(InfluencerDTO::new); 
 	}
 	
 	private void copyInfluencerDTO(InfluencerDTO iDTO, Influencer inf) {
